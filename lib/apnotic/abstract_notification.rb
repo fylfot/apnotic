@@ -11,11 +11,13 @@ module Apnotic
                   :priority,
                   :topic,
                   :apns_collapse_id,
-                  :authorization
+                  :authorization,
+                  :type
 
     def initialize(token)
       @token   = token
       @apns_id = SecureRandom.uuid
+      @type    = 'alert'
     end
 
     def body
@@ -24,10 +26,6 @@ module Apnotic
 
     def authorization_header
       authorization ? "bearer #{authorization}" : nil
-    end
-
-    def background_notification?
-      false
     end
 
     private
